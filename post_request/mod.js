@@ -37,8 +37,11 @@ async function handleRequest(request) {
   };
 
   // Handle JSON data.
-  if (contentType.includes("application/json")) {
+  if (contentType.includes("application/json")) {  
     const json = await request.json();
+    
+    console.log(json);
+    
     return new Response(JSON.stringify({ json }, null, 2), responseInit);
   }
 
@@ -52,6 +55,9 @@ async function handleRequest(request) {
     for (const [key, value] of formData.entries()) {
       formDataJSON[key] = value;
     }
+    
+    console.log(formDataJSON);
+    
     return new Response(
       JSON.stringify({ form: formDataJSON }, null, 2),
       responseInit,
@@ -61,6 +67,9 @@ async function handleRequest(request) {
   // Handle plain text.
   if (contentType.includes("text/plain")) {
     const text = await request.text();
+    
+    console.log(text);
+    
     return new Response(JSON.stringify({ text }, null, 2), responseInit);
   }
 
